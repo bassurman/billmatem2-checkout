@@ -1,0 +1,23 @@
+{
+    "name": "billmate/magento2",
+    "type": "magento2-module",
+    "authors": [
+        {
+            "name": "alex",
+            "email": "alex@ecomatic.se"
+        }
+    ],
+    "require": {},
+    "license": [
+        "OSL-3.0",
+        "AFL-3.0"
+    ],
+    "autoload": {
+        "files": [
+            "BillmateCheckout/registration.php"
+        ],
+        "psr-4": {
+            "Billmate\\BillmateCheckout\\": "BillmateCheckout"
+        }
+    }
+}

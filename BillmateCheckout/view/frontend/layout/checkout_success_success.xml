@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<page layout="1column" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+	<head>
+		<css src="Billmate_BillmateCheckout/css/success.css" />
+	</head> 
+    <body>
+        <referenceContainer name="checkout.root" remove="true">
+            <action method="setTemplate">
+                <argument name="template" xsi:type="string">Billmate_BillmateCheckout::success.phtml</argument>
+            </action>
+        </referenceContainer>
+		<referenceContainer name="columns">
+			<container name="div.sidebar.main" htmlTag="div" htmlClass="sidebar sidebar-main" after="main">
+			</container>
+			<container name="column.main" htmlTag="div" htmlClass="column main" before="main"> <!--   -->
+				<block class="Billmate\BillmateCheckout\Block\Success" cacheable="false" name="billmatecheckout" template="success.phtml" />
+			</container>
+		</referenceContainer>
+    </body>
+</page>

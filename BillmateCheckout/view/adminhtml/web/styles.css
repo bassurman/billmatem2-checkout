@@ -1,0 +1,12 @@
+.billmate-section .button-container {
+    float: right;
+}
+.billmate-section .config-alt {
+    background-image: url("https://billmate.se/billmate/logos/billmate_cloud_s.png");
+    background-repeat: no-repeat, no-repeat, no-repeat;
+    background-position: left, center, right; height: 52px; margin: 0.5rem 0 0; width: 225px;
+}
+
+.billmate-section.section-config.active > .admin__collapsible-block + input + fieldset {
+    margin-left: 40px;
+}

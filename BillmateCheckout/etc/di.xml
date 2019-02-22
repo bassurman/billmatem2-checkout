@@ -1,0 +1,19 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Checkout\Block\Onepage\Link">
+        <plugin name="bm_url" type="Billmate\BillmateCheckout\Plugin\Url" sortOrder="10" disabled="false"/>
+    </type>
+    <type name="Magento\Checkout\Block\Cart\Sidebar">
+        <plugin name="bm_url" type="Billmate\BillmateCheckout\Plugin\Url" sortOrder="10" disabled="false"/>
+    </type>
+    <type name="Magento\Checkout\Block\Cart">
+        <plugin name="bm_url" type="Billmate\BillmateCheckout\Plugin\Url" sortOrder="10" disabled="false"/>
+    </type>
+    <type name="Magento\Config\Model\Config\Structure\Reader">
+        <arguments>
+            <argument name="data" xsi:type="array">
+                <item name="ssl" xsi:type="boolean">true</item>
+                <item name="debug" xsi:type="boolean">false</item>
+            </argument>
+        </arguments>
+    </type>
+</config>

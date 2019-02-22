@@ -1,0 +1,23 @@
+<?php
+/**
+ * Shopping cart content template
+ *
+ * @var $block \Billmate\BillmateCheckout\Block\Success
+ */
+?>
+
+<script>
+    require([
+        'Magento_Customer/js/customer-data'
+    ], function (customerData) {
+        var sections = ['cart'];
+        customerData.invalidate(sections);
+    });
+</script>
+
+<p><?= __("We'll email you an order confirmation with details and tracking info.") ?></p>
+<p><?= __("Your order # is: <span>%1</span>.", $block->getLastOrderIncId()) ?></p>
+<form action="<?= $block->getUrl() ?>">
+    <input type="submit" value="<?= __('Continue Shopping') ?>" />
+</form>
+
