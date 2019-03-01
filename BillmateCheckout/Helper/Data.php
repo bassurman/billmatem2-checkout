@@ -182,13 +182,16 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
             'city' => $shippingData['city'],
             'country_id' => $shippingData['country_id'],
             'postcode' => $shippingData['postcode'],
-            'telephone' => $shippingData['telephone']
+            'telephone' => $shippingData['telephone'],
+            'email' => $shippingData['email'],
         ];
 
         $this->getQuote()->getBillingAddress()->addData($billingAddress);
         $this->setSessionData('billmate_billing_address', $billingAddress);
         $this->setSessionData('billmate_telephone', $shippingData['telephone']);
-        $this->setSessionData('billmate_email', $shippingData['email']);
+        if ($shippingData['email']) {
+            $this->setSessionData('billmate_email', $shippingData['email']);
+        }
 
 		if ($this->getSessionData('billmate_shipping_address')) {
 			$this->setShippingAddress($shippingData);
@@ -222,6 +225,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         $shippingAddress->save();
 		$this->getQuote()->collectTotals();
         $this->getQuote()->save();
+        $this->setSessionData('shipping_code', $methodInput);
     }
 
     /**

@@ -461,4 +461,20 @@ position:relative;
 		left: -62%;
 	} 
 }
-	
+
+.bm-options-wrapper .item-options dt {
+    clear: left;
+    float: left;
+    margin: 0 10px 5px 0;
+}
+
+.bm-options-wrapper .item-options dt:after {
+    content: ': ';
+}
+.bm-options-wrapper .item-options dd {
+    margin: 0 0 5px;
+    font-weight: normal;
+}
+.bm-options-wrapper .item-options {
+    font-size: 12px;
+}

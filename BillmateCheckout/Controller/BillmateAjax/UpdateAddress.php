@@ -101,8 +101,8 @@ class UpdateAddress extends \Magento\Framework\App\Action\Action {
                 'telephone' => $customerAddress['Billing']['phone']
             ];
         } elseif ($billingAddress) {
-            $_email = $this->getRequest()->getParam('email','');
-            $_email = ($_email == '' && isset($billingAddress['email'])) ? $billingAddress['email'] : '';
+            $emailRequested = $this->getRequest()->getParam('email','');
+            $_email = (isset($billingAddress['email'])) ? $billingAddress['email'] : $emailRequested;
             $billingFormatted = [
                 'email'=> $_email,
                 'firstname' => $billingAddress['firstname'],

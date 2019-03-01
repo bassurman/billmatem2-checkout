@@ -25,7 +25,28 @@
             <div class="billmate-checkout-img">
                 <?= $block->getImage($item->getProduct(), 'billmate_checkout_content')->toHtml() ?>
             </div>
-            <div class="billmate-checkout-name"><p><?= $block->escapeHtml($item->getName()) ?></p></div>
+            <div class="billmate-checkout-name">
+                <p><?= $block->escapeHtml($item->getName()) ?></p>
+                <?php if($block->isShowAttribute()): ?>
+                    <div class="bm-options-wrapper">
+                    <?php if ($_options = $block->getProductOptions($item)):?>
+                        <dl class="item-options">
+                            <?php foreach ($_options as $_option) : ?>
+                                <?php $_formatedOptionValue = $block->getFormatedOptionValue($_option) ?>
+                                <dt><?= $block->escapeHtml($_option['label']) ?></dt>
+                                <dd>
+                                    <?php if (isset($_formatedOptionValue['full_view'])): ?>
+                                        <?= /* @escapeNotVerified */ $_formatedOptionValue['full_view'] ?>
+                                    <?php else: ?>
+                                        <?= /* @escapeNotVerified */ $_formatedOptionValue['value'] ?>
+                                    <?php endif; ?>
+                                </dd>
+                            <?php endforeach; ?>
+                        </dl>
+                    <?php endif;?>
+                    </div>
+                <?php  endif; ?>
+            </div>
             <div class="billmate-checkout-price" id="price_<?= $item->getId() ?>"><?= $block->formatPrice($item->getPrice()) ?></div>
             <div class="billmate-checkout-qty <?= !$isEnabledButtons? 'no-buttons' : '' ?>" id="qty_<?= $item->getId() ?>">
                 <?php if($isEnabledButtons): ?>

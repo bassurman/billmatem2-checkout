@@ -142,8 +142,9 @@ class Iframe extends \Magento\Framework\App\Helper\AbstractHelper
                 'withtax' => $this->toCents($shippingAddressTotal->getShippingInclTax()),
             ],
             'Total' => [
-                'withouttax' => $this->toCents($shippingAddressTotal->getGrandTotal() - $shippingAddressTotal->getTaxAmount()),
-                'tax' => $this->toCents($shippingAddressTotal->getTaxAmount()),
+                'withouttax' => $this->toCents($shippingAddressTotal->getGrandTotal()
+                    - $shippingAddressTotal->getTaxAmount() - $shippingAddressTotal->getDiscountTaxCompensationAmount()),
+                'tax' => $this->toCents($shippingAddressTotal->getTaxAmount() + $shippingAddressTotal->getDiscountTaxCompensationAmount()),
                 'rounding' => $this->toCents(0),
                 'withtax' => $this->toCents($shippingAddressTotal->getGrandTotal()),
             ]

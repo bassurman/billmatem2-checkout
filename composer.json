@@ -1,5 +1,6 @@
 {
-    "name": "billmate/magento2",
+    "name": "billmate/magento2-checkout",
+    "description": "Billmate checkout - payment method",
     "type": "magento2-module",
     "authors": [
         {
@@ -8,7 +9,7 @@
         }
     ],
     "require": {},
-    "version": "1.0.1",
+    "version": "1.0.0",
     "license": [
         "OSL-3.0",
         "AFL-3.0"

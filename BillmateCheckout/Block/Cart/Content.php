@@ -30,6 +30,20 @@ class Content extends \Magento\Checkout\Block\Onepage
     protected $_taxHelper;
 
     /**
+     * Catalog product configuration
+     *
+     * @var \Magento\Catalog\Helper\Product\Configuration
+     */
+    protected $_productConfig = null;
+
+
+    /**
+     * @var \Magento\Catalog\Helper\Product\ConfigurationPool
+     */
+    protected $configurationPool;
+
+
+    /**
      * Cart constructor.
      *
      * @param \Magento\Framework\View\Element\Template\Context $context
@@ -53,6 +67,8 @@ class Content extends \Magento\Checkout\Block\Onepage
         \Magento\Catalog\Block\Product\ImageBuilder $imageBuilder,
         \Billmate\BillmateCheckout\Helper\Config $configHelper,
         \Magento\Tax\Helper\Data $taxHelper,
+        \Magento\Catalog\Helper\Product\Configuration $productConfig,
+        \Magento\Catalog\Helper\Product\ConfigurationPool $configurationPool,
         array $layoutProcessors = [],
         array $data = []
 	) {
@@ -63,6 +79,8 @@ class Content extends \Magento\Checkout\Block\Onepage
         $this->imageBuilder = $imageBuilder;
         $this->configHelper = $configHelper;
         $this->_taxHelper = $taxHelper;
+        $this->_productConfig = $productConfig;
+        $this->configurationPool = $configurationPool;
 	}
 
     /**
@@ -117,6 +135,59 @@ class Content extends \Magento\Checkout\Block\Onepage
     public function isEnabledButtons()
     {
         return $this->configHelper->getBtnEnable();
+    }
+
+    /**
+     * @return bool
+     */
+    public function isShowAttribute()
+    {
+        return $this->configHelper->getShowAttribute();
+    }
+
+    /**
+     * @param $item
+     *
+     * @return mixed
+     */
+    public function getProductOptions($item)
+    {
+        /* @var $helper \Magento\Catalog\Helper\Product\Configuration */
+        return $this->configurationPool
+            ->getByProductType($item->getProductType())
+            ->getOptions($item);
+    }
+
+    /**
+     * Accept option value and return its formatted view
+     *
+     * @param mixed $optionValue
+     * Method works well with these $optionValue format:
+     *      1. String
+     *      2. Indexed array e.g. array(val1, val2, ...)
+     *      3. Associative array, containing additional option info, including option value, e.g.
+     *          array
+     *          (
+     *              [label] => ...,
+     *              [value] => ...,
+     *              [print_value] => ...,
+     *              [option_id] => ...,
+     *              [option_type] => ...,
+     *              [custom_view] =>...,
+     *          )
+     *
+     * @return array
+     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
+     */
+    public function getFormatedOptionValue($optionValue)
+    {
+        /* @var $helper \Magento\Catalog\Helper\Product\Configuration */
+        $helper = $this->_productConfig;
+        $params = [
+            'max_length' => 55,
+            'cut_replacer' => ' <a href="#" class="dots tooltip toggle" onclick="return false">...</a>'
+        ];
+        return $helper->getFormattedOptionValue($optionValue, $params);
     }
 
     /**

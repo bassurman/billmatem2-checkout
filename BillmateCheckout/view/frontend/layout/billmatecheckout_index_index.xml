@@ -14,7 +14,9 @@
 			<container name="bm-cart" htmlTag="div" htmlClass="bm-cart-wrapper" after="main">
 				<block class="Billmate\BillmateCheckout\Block\Cart" ifconfig="payment/billmate_checkout/general/enable" cacheable="false" name="billmatecart" template="cart.phtml" before="main" after="header-wrapper">
 					<block class="Billmate\BillmateCheckout\Block\Cart\Content" ifconfig="payment/billmate_checkout/general/enable"
-					   cacheable="false" name="billmate.cart.content" template="cart/content.phtml" />
+					   cacheable="false" name="billmate.cart.content" template="cart/content.phtml">
+						<block class="Magento\Bundle\Block\Checkout\Cart\Item\Renderer" name="bm.item.renderer"></block>
+					</block>
 				</block>
 			</container>
 			<container name="bm-checkout" htmlTag="div" htmlClass="bm-checkout-wrapper" after="bm-cart">

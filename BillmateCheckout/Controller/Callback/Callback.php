@@ -101,7 +101,7 @@ class Callback extends \Billmate\BillmateCheckout\Controller\FrontCore
                 "number" => $requestData['data']['number']
             );
             $paymentInfo = $this->billmateProvider->getPaymentinfo($values);
-
+            //$paymentInfo['PaymentData']['orderid'] = '000000217';
             $order = $this->helper->getOrderByIncrementId($paymentInfo['PaymentData']['orderid']);
             if (!is_string($order->getIncrementId())) {
                 $orderInfo = $this->getOrderInfo($paymentInfo);
@@ -192,6 +192,7 @@ class Callback extends \Billmate\BillmateCheckout\Controller\FrontCore
             'shipping_address' => $customerAddressData,
             'items' => array()
         );
+        $orderInfo['payment_method_name'] = $paymentInfo['PaymentData']['method_name'];
 
         $articles = $paymentInfo['Articles'];
         foreach($articles as $article) {

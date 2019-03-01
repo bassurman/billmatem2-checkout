@@ -88,7 +88,7 @@ class Config extends \Magento\Framework\App\Helper\AbstractHelper
      */
     public function getShowAttribute()
     {
-        return $this->getConfig(self::XML_PATH_GENERAL_ATTRIBUTES);
+        return (bool)$this->getConfig(self::XML_PATH_GENERAL_ATTRIBUTES);
     }
 
     /**

@@ -111,8 +111,6 @@ class Order
         $billmateBillingAddress = $this->dataHelper->getSessionData('billmate_billing_address');
         $shippingCode = $this->dataHelper->getSessionData('shipping_code');
 
-        $orderData = $this->getOrderData();
-
         $actual_quote = $this->quoteCollectionFactory->create()
             ->addFieldToFilter("reserved_order_id", $orderId)->getFirstItem();
 
@@ -149,9 +147,14 @@ class Order
         $actual_quote->getPayment()->importData([
             'method' => $billmatePaymentMethod,
         ]);
-        $actual_quote->getPayment()->setAdditionalInformation(
-            self::BM_ADDITIONAL_INFO_CODE, $orderData['payment_method_name']
-        );
+
+
+        $orderData = $this->getOrderData();
+        if (isset($orderData['payment_method_name'])) {
+            $actual_quote->getPayment()->setAdditionalInformation(
+                self::BM_ADDITIONAL_INFO_CODE, $orderData['payment_method_name']
+            );
+        }
 
         $actual_quote->setReservedOrderId($orderId);
         $actual_quote->collectTotals();

@@ -69,6 +69,7 @@ define([
 			});
 		},
 		sendRequest: function (requestData) {
+            BillmateIframe.lock();
             $.ajax({
                 showLoader: true,
                 url: bmcathis.config.request_url,
@@ -80,14 +81,14 @@ define([
                     location.href = data.redirect_url;
                     return;
                 }
-
+                BillmateIframe.update();
                 bmcathis.updateHtmlContent(data);
                 bmcathis.switchActionButtons(false);
                 bmcathis.updateCustomerData();
+                BillmateIframe.unlock();
             });
         },
 		updateHtmlContent: function(data) {
-            document.getElementById('checkout').src = data.iframe;
             document.getElementById('billmate-cart').innerHTML = data.cart;
 		},
 		updateCustomerData: function() {

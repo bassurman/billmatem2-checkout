@@ -5,7 +5,7 @@ use Magento\Framework\App\Action\Context;
 
 class Config {
 
-    const CONFIG_PATH_PRIVACY_URL = 'groups/billmate_checkout/groups/general/fields/privacy_policy_url/value';
+    const CONFIG_PATH_TERMS_URL = 'groups/billmate_checkout/groups/general/fields/terms_url/value';
 
     const CONFIG_PATH_ENABLE = 'groups/billmate_checkout/groups/general/fields/enable/value';
 
@@ -40,10 +40,10 @@ class Config {
      */
     public function beforeSave($configModel)
     {
-        $privacyPolicy = $configModel->getData(self::CONFIG_PATH_PRIVACY_URL);
+        $privacyPolicy = $configModel->getData(self::CONFIG_PATH_TERMS_URL);
         $isEnable = $configModel->getData(self::CONFIG_PATH_ENABLE);
         if ($isEnable && !$privacyPolicy) {
-            $this->messageManager->addWarning(__('The option "Privacy Policy" is required for Billmate Checkout'));
+            $this->messageManager->addWarning(__('The option "Store Terms" is required for Billmate Checkout'));
         }
     }
 }

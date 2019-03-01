@@ -68,7 +68,7 @@ class Success extends \Billmate\BillmateCheckout\Controller\FrontCore
 	public function execute()
     {
         $this->helper->setSessionData('billmate_checkout_id',null);
-		$resultPage = $this->resultPageFactory->create();
+
 		try{
             $requestData = $this->getBmRequestData();
             $values = array(
@@ -106,8 +106,6 @@ class Success extends \Billmate\BillmateCheckout\Controller\FrontCore
 			$this->checkoutSession->setLastSuccessQuoteId($this->helper->getQuote()->getId());
 			$this->checkoutSession->setLastQuoteId($this->helper->getQuote()->getId());
 			$this->checkoutSession->setLastOrderId($orderId);
-
-            $this->helper->clearSession();
 		}
 		catch (\Exception $e){
             $this->helper->clearBmSession();
@@ -124,6 +122,6 @@ class Success extends \Billmate\BillmateCheckout\Controller\FrontCore
            return $this->resultRedirectFactory->create()->setPath('billmatecheckout/success/error');
 		}
 
-		return $resultPage;
+        return $this->resultRedirectFactory->create()->setPath('checkout/onepage/success');
 	}
 }
