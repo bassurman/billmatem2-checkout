@@ -4,8 +4,8 @@
     "type": "magento2-module",
     "authors": [
         {
-            "name": "alex",
-            "email": "alex@ecomatic.se"
+            "name": "Aliaksei Hryharenka",
+            "email": "alexhryharenka@belvg.com"
         }
     ],
     "require": {},
